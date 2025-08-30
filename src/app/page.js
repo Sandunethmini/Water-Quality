@@ -6,9 +6,9 @@ import Table from './components/Table';
 
 export default function App() {
   return (
-    <div className="flex">
+    <div className="flex min-h-screen">
       <Navbar />
-      <div className="flex-1">
+      <div className="flex-grow flex flex-col p-6 gap-6 ml-[250px] bg-gray-50">
         <Header />
         <Box />
         <Table />

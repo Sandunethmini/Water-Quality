@@ -2,6 +2,7 @@
 import React from "react";
 
 function Table() {
+  // Sample grouped data: each group represents a time slot with tank readings
   const groupedData = [
     {
       date: "2025/04/10",
@@ -33,11 +34,12 @@ function Table() {
   ];
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md">
+    <div className="pl-6 bg-white rounded-lg shadow-md">
       <table className="w-full text-left">
-        <thead className="shadow-md">
+        <thead className="">
           <tr>
-            <th className="py-2 text-justify">Date</th>
+            {/* Table headers for each metric */}
+            <th className="py-2 pl-4 text-justify">Date</th>
             <th className="py-2 text-justify">Time</th>
             <th className="py-2 text-justify">Tank No:</th>
             <th className="py-2 text-justify">O₂ level (ppm)</th>
@@ -47,17 +49,20 @@ function Table() {
           </tr>
         </thead>
         <tbody className="shadow">
+          {/* Render each group (date/time slot) */}
           {groupedData.map((group, groupIdx) => (
             <React.Fragment key={group.time}>
+              {/* Render each tank's data for the group */}
               {group.tanks.map((tank, tankIdx) => (
                 <tr key={group.time + tank.tank}>
+                  {/* Only show date/time for the first tank in the group, using rowSpan */}
                   {tankIdx === 0 && (
                     <>
-                      {/* Add font-bold here */}
                       <td rowSpan={group.tanks.length} className="py-2 text-justify font-bold">{group.date}</td>
                       <td rowSpan={group.tanks.length} className="py-2 text-justify">{group.time}</td>
                     </>
                   )}
+                  {/* Tank number and metric values */}
                   <td className="py-2 text-justify">{tank.tank}</td>
                   <td className="py-2 text-justify">{tank.o2}</td>
                   <td className="py-2 text-justify">{tank.ph}</td>
@@ -65,11 +70,11 @@ function Table() {
                   <td className="py-2 text-justify">{tank.nh3}</td>
                 </tr>
               ))}
-              {/* Gray horizontal line, partial width, between groups */}
+              {/* Render a horizontal line between groups except after the last group */}
               {groupIdx < groupedData.length - 1 && (
                 <tr>
                   <td colSpan={7} className="py-0">
-                    <div className="mx-auto my-2 w-2/3 h-0.5 bg-gray-300 rounded"></div>
+                    <div className="mx-auto my-2 w-2/3 h-0.5 bg-white rounded"></div>
                   </td>
                 </tr>
               )}
@@ -78,7 +83,7 @@ function Table() {
         </tbody>
       </table>
       <hr className="border-t-2 border-black my-2" />
-      <div className="text-center mt-4 cursor-pointer bg-white rounded-lg shadow-md">See All</div>
+      <div className="text-center mt-4 pb-3 cursor-pointer bg-white rounded-lg shadow-md">See All</div>
     </div>
   );
 }

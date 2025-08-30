@@ -3,6 +3,7 @@ import { useState } from "react";
 import { FiDownload } from "react-icons/fi";
 
 function Header() {
+  // State for the selected date range
   const [startDate, setStartDate] = useState("2025-04-08");
   const [endDate, setEndDate] = useState("2025-05-08");
 
@@ -10,6 +11,7 @@ function Header() {
     <div className="p-6 flex justify-between items-center bg-white shadow-md">
       <h2 className="text-2xl font-bold text-blue-600">Water Quality</h2>
       <div className="flex items-center gap-4">
+        {/* Start date picker */}
         <input
           type="date"
           value={startDate}
@@ -17,12 +19,14 @@ function Header() {
           className="border rounded px-2 py-1"
         />
         <span className="mx-2">to</span>
+        {/* End date picker */}
         <input
           type="date"
           value={endDate}
           onChange={(e) => setEndDate(e.target.value)}
           className="border rounded px-2 py-1"
         />
+        {/* Export button with icon */}
         <button className=" border rounded text-black px-2 py-1 flex items-center cursor-pointer">
           <FiDownload className="mr-2" />
           Export
